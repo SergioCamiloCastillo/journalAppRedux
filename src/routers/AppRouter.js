@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -8,8 +8,14 @@ import {
 
 import { AuthRouter } from './AuthRouter';
 import { JournalScreen } from '../components/journal/JournalScreen';
+import { onAuthStateChanged, getAuth } from '@firebase/auth';
 
 export const AppRouter = () => {
+    const auth = getAuth();
+
+    useEffect(()=>{
+        onAuthStateChanged(auth)
+    },[])
     return (
         <Router>
             <div>

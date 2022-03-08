@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { startLoginEmailPassword, startGoogleLogin } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
@@ -7,7 +7,8 @@ import { useForm } from "../../hooks/useForm";
 export const LoginScreen = () => {
   const dispatch = useDispatch();
   //dispatch sirve para hacer dispatch de acciones
-  
+  const { loading } = useSelector((state) => state.ui);
+  console.log("este es el loading ", loading);
   const [formValues, handleInputChange] = useForm({
     email: "",
     password: "",
@@ -46,7 +47,7 @@ export const LoginScreen = () => {
         />
 
         <button type="submit" className="btn btn-primary btn-block">
-          Login
+          {!loading ? "Loading" : "Login"}
         </button>
 
         <div className="auth__social-networks">
